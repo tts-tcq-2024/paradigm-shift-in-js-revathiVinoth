@@ -7,6 +7,7 @@ const HIGH_CHARGE_RATE = 0.8
 function batteryIsOk(temperature, soc, chargeRate) {
 
     if (isTemperatureOK(temperature) && isSocOK(soc) && isChargeRateOK(chargeRate)) {
+        console.log("Battery is OK")
         return true;
     }
 }
@@ -55,8 +56,10 @@ function ExpectTrueOrFalse(expression) {
 
 function main() {
     ExpectTrueOrFalse(batteryIsOk(25, 70, 0.7));
-    ExpectTrueOrFalse(batteryIsOk(50, 85, 0.0));
-    ExpectTrueOrFalse(batteryIsOk(10, 40, 0.0));
+    ExpectTrueOrFalse(batteryIsOk(-1, 70, 0.7));
+    ExpectTrueOrFalse(batteryIsOk(50, 70, 0.0));
+    ExpectTrueOrFalse(batteryIsOk(50, -1, 0.0));
+    ExpectTrueOrFalse(batteryIsOk(10, 85, 0.0));
     ExpectTrueOrFalse(batteryIsOk(10, 35, 0.9));
     console.log("All ok");
     return 0;
