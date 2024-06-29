@@ -1,18 +1,47 @@
+const LOW_TEMP = 0
+const HIGH_TEMP = 45
+const LOW_SOC = 20
+const HIGH_SOC = 80
+const HIGH_CHARGE_RATE = 0.8
 
 function batteryIsOk(temperature, soc, chargeRate) {
-    if (temperature < 0 || temperature > 45) {
-        console.log("Temperature is out of range!");
-        return false;
-    } else if (soc < 20 || soc > 80) {
-        console.log("State of Charge is out of range!");
-        return false;
-    } else if (chargeRate > 0.8) {
-        console.log("Charge Rate is out of range!");
-        return false;
+
+    if (isTemperatureOK(temperature) && isSocOK(soc) && isChargeRateOK(chargeRate)) {
+        return true;
     }
-    return true;
 }
 
+function isTemperatureOK(temperature) {
+    if (temperature < LOW_TEMP) {
+        console.log("Temperature is low!");
+        return false
+    }
+    else if (temperature > HIGH_TEMP) {
+        console.log("Temperature is high")
+        return false
+    }
+    return true
+}
+
+function isSocOK(soc) {
+    if (soc < LOW_SOC) {
+        console.log("State of charge is very low ")
+        return false
+    }
+    else if (soc > HIGH_SOC) {
+        console.log("State of charge is very high")
+        return false
+    }
+    return true
+}
+
+function isChargeRateOK(chargeRate) {
+    if (chargeRate > HIGH_CHARGE_RATE) {
+        console.log("Charge is high")
+        return false
+    }
+    return true
+}
 
 function ExpectTrueOrFalse(expression) {
     if (expression) {
@@ -21,6 +50,7 @@ function ExpectTrueOrFalse(expression) {
     else {
         console.log("Expected true, but got false");
     }
+    return true
 }
 
 function main() {
