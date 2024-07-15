@@ -4,6 +4,7 @@ const LOW_SOC = 20
 const HIGH_SOC = 80
 const HIGH_CHARGE_RATE = 0.8
 
+//function to validate if the battery is in Range in terms of temperature , SOC and chargeRate
 function validateBatteryRange(temperature, soc, chargeRate) {
 
     if (validateTemperature(temperature) && validateSoc(soc) && validateChargeRate(chargeRate)) {
@@ -12,6 +13,7 @@ function validateBatteryRange(temperature, soc, chargeRate) {
     }
 }
 
+//function to validate if temperature between LOW_TEMP range and HIGH_TEMP range
 function validateTemperature(temperature) {
     if (temperature < LOW_TEMP) {
         console.log("Temperature is low!");
@@ -24,6 +26,7 @@ function validateTemperature(temperature) {
     return true
 }
 
+//function to validate if soc is between LOW_SOC range and HIGH_SOC range
 function validateSoc(soc) {
     if (soc < LOW_SOC) {
         console.log("State of charge is very low ")
@@ -36,6 +39,7 @@ function validateSoc(soc) {
     return true
 }
 
+//function to validate if the charge rate is within HIGH_CHARGE_RATE 
 function validateChargeRate(chargeRate) {
     if (chargeRate > HIGH_CHARGE_RATE) {
         console.log("Charge is high")
