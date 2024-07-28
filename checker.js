@@ -4,9 +4,10 @@ const LOW_SOC = 20
 const HIGH_SOC = 80
 const HIGH_CHARGE_RATE = 0.8
 
-function batteryIsOk(temperature, soc, chargeRate) {
+//function to validate if the battery is in Range in terms of temperature , SOC and chargeRate
+function validateBatteryRange(temperature, soc, chargeRate) {
 
-    if (isTemperatureOK(temperature) && isSocOK(soc) && isChargeRateOK(chargeRate)) {
+    if (validateTemperature(temperature) && validateSoc(soc) && validateChargeRate(chargeRate)) {
         console.log("Battery is OK")
         return true;
     }
@@ -23,7 +24,8 @@ function monitorAndPrintWarning(highestThreshold, lowestThreshold, metrics, metr
     }
 }
 
-function isTemperatureOK(temperature) {
+//function to validate if temperature between LOW_TEMP range and HIGH_TEMP range
+function validateTemperature(temperature) {
     if (temperature < LOW_TEMP) {
         console.log("Temperature is low!");
         return false
@@ -36,7 +38,8 @@ function isTemperatureOK(temperature) {
     return true
 }
 
-function isSocOK(soc) {
+//function to validate if soc is between LOW_SOC range and HIGH_SOC range
+function validateSoc(soc) {
     if (soc < LOW_SOC) {
         console.log("State of charge is very low ")
         return false
@@ -49,7 +52,8 @@ function isSocOK(soc) {
     return true
 }
 
-function isChargeRateOK(chargeRate) {
+//function to validate if the charge rate is within HIGH_CHARGE_RATE 
+function validateChargeRate(chargeRate) {
     if (chargeRate > HIGH_CHARGE_RATE) {
         console.log("Charge is high")
         return false
@@ -69,12 +73,12 @@ function ExpectTrueOrFalse(expression) {
 }
 
 function main() {
-    ExpectTrueOrFalse(batteryIsOk(25, 70, 0.7));
-    ExpectTrueOrFalse(batteryIsOk(-1, 70, 0.7));
-    ExpectTrueOrFalse(batteryIsOk(50, 70, 0.0));
-    ExpectTrueOrFalse(batteryIsOk(50, -1, 0.0));
-    ExpectTrueOrFalse(batteryIsOk(10, 85, 0.0));
-    ExpectTrueOrFalse(batteryIsOk(10, 35, 0.9));
+    ExpectTrueOrFalse(validateBatteryRange(25, 70, 0.7));
+    ExpectTrueOrFalse(validateBatteryRange(-1, 70, 0.7));
+    ExpectTrueOrFalse(validateBatteryRange(50, 70, 0.0));
+    ExpectTrueOrFalse(validateBatteryRange(50, -1, 0.0));
+    ExpectTrueOrFalse(validateBatteryRange(10, 85, 0.0));
+    ExpectTrueOrFalse(validateBatteryRange(10, 35, 0.9));
     console.log("All ok");
     return 0;
 }
