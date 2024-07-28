@@ -12,6 +12,17 @@ function batteryIsOk(temperature, soc, chargeRate) {
     }
 }
 
+function monitorAndPrintWarning(highestThreshold, lowestThreshold, metrics, metricName) {
+    const highCutOffMetrics = highestThreshold * 0.05
+    const lowCutOffMetrics = lowestThreshold * 0.05
+    if (metrics < lowestThreshold + lowCutOffMetrics && metricName != "chargeRate") {
+        console.log("Warning" + metricName + "is approaching lower level")
+    }
+    else if (metrics > highestThreshold - highCutOffMetrics) {
+        console.log("Warning" + metricName + "is approaching higher level")
+    }
+}
+
 function isTemperatureOK(temperature) {
     if (temperature < LOW_TEMP) {
         console.log("Temperature is low!");
@@ -21,6 +32,7 @@ function isTemperatureOK(temperature) {
         console.log("Temperature is high")
         return false
     }
+    monitorAndPrintWarning(HIGH_TEMP, LOW_TEMP, temperature, "temperature")
     return true
 }
 
@@ -33,6 +45,7 @@ function isSocOK(soc) {
         console.log("State of charge is very high")
         return false
     }
+    monitorAndPrintWarning(HIGH_SOC, LOW_SOC, soc, "State of charge")
     return true
 }
 
@@ -41,6 +54,7 @@ function isChargeRateOK(chargeRate) {
         console.log("Charge is high")
         return false
     }
+    monitorAndPrintWarning(HIGH_CHARGE_RATE, chargeRate, "chargeRate")
     return true
 }
 
