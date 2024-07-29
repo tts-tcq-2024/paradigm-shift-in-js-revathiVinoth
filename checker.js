@@ -16,10 +16,11 @@ function validateBatteryRange(temperature, soc, chargeRate) {
 function monitorAndPrintWarning(highestThreshold, lowestThreshold, metrics, metricName) {
     const highCutOffMetrics = highestThreshold * 0.05
     const lowCutOffMetrics = lowestThreshold * 0.05
-    if (metrics < lowestThreshold + lowCutOffMetrics && metricName != "chargeRate") {
+
+    if (metrics <= lowestThreshold + lowCutOffMetrics && metricName != "chargeRate") {
         console.log("Warning" + metricName + "is approaching lower level")
     }
-    else if (metrics > highestThreshold - highCutOffMetrics) {
+    else if (metrics >= highestThreshold - highCutOffMetrics) {
         console.log("Warning" + metricName + "is approaching higher level")
     }
 }
@@ -79,7 +80,9 @@ function main() {
     testBatteryMetrics(validateBatteryRange(50, -1, 0.0));
     testBatteryMetrics(validateBatteryRange(10, 85, 0.0));
     testBatteryMetrics(validateBatteryRange(10, 35, 0.9));
-    console.log("All ok");
+    testBatteryMetrics(validateBatteryRange(42.75, 24, 0));
+    testBatteryMetrics(validateBatteryRange(-4, 24, 0));
+    testBatteryMetrics(validateBatteryRange(25, 76, 0));
     return 0;
 }
 
