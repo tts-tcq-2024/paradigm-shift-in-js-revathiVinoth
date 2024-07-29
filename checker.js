@@ -12,7 +12,7 @@ function validateBatteryRange(temperature, soc, chargeRate) {
         return true;
     }
 }
-
+//To monitor and print warning
 function monitorAndPrintWarning(highestThreshold, lowestThreshold, metrics, metricName) {
     const highCutOffMetrics = highestThreshold * 0.05
     const lowCutOffMetrics = lowestThreshold * 0.05
