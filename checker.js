@@ -62,23 +62,23 @@ function validateChargeRate(chargeRate) {
     return true
 }
 
-function ExpectTrueOrFalse(expression) {
+function testBatteryMetrics(expression) {
     if (expression) {
-        console.log("Expected false, but got true");
+        console.log("Battery metrics are ok !!");
     }
     else {
-        console.log("Expected true, but got false");
+        console.log("Battery metrics are not ok");
     }
     return true
 }
 
 function main() {
-    ExpectTrueOrFalse(validateBatteryRange(25, 70, 0.7));
-    ExpectTrueOrFalse(validateBatteryRange(-1, 70, 0.7));
-    ExpectTrueOrFalse(validateBatteryRange(50, 70, 0.0));
-    ExpectTrueOrFalse(validateBatteryRange(50, -1, 0.0));
-    ExpectTrueOrFalse(validateBatteryRange(10, 85, 0.0));
-    ExpectTrueOrFalse(validateBatteryRange(10, 35, 0.9));
+    testBatteryMetrics(validateBatteryRange(25, 70, 0.7));
+    testBatteryMetrics(validateBatteryRange(-1, 70, 0.7));
+    testBatteryMetrics(validateBatteryRange(50, 70, 0.0));
+    testBatteryMetrics(validateBatteryRange(50, -1, 0.0));
+    testBatteryMetrics(validateBatteryRange(10, 85, 0.0));
+    testBatteryMetrics(validateBatteryRange(10, 35, 0.9));
     console.log("All ok");
     return 0;
 }
